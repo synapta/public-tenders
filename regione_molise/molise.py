@@ -55,6 +55,9 @@ def extract_cig_cups_rdo(oggetto):
         riferimenti.append(('RDO', rdo[1]))
     return riferimenti
 
+def clean_text_content(text):
+    return re.sub('[\n\r]+', ' ', text)
+
 def scrape_page(text):
     html = fromstring(text)
     trs = html.cssselect('#ColCent .Contenuti tbody tr')
@@ -64,7 +67,7 @@ def scrape_page(text):
         pub_da, pub_a = parse_periodo(tds[0].text_content())
         id_atto = tds[1].text_content()
         tipologia = tds[2].text_content()
-        oggetto = tds[3].text_content()
+        oggetto = clean_text_content(tds[3].text_content())
         riferimenti = extract_cig_cups_rdo(oggetto)
         settore = tds[4].text_content()
         allegati = get_allegati(tds[5])
@@ -132,6 +135,13 @@ def re_tests():
     assert len(cups) == 2
     assert cups[0][1] == "F94E15000210001"
     assert cups[1][1] == "F97B14000330001"
+
+    oggetto = clean_text_content("""C.I.G. n.\r\n6626872BC3""")
+    riferimento = extract_cig_cups_rdo(oggetto)
+    assert riferimento
+    assert len(riferimento) == 1
+    assert riferimento[0][0] == 'CIG'
+    assert riferimento[0][1] == '6626872BC3'
 
 if __name__ == '__main__':
     re_tests()
