@@ -1,0 +1,19 @@
+{
+  "name": "hacknight",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babyparse": "^0.4.5",
+    "jquery": "^2.2.3",
+    "nightmare": "^2.3.4",
+    "x-ray": "^2.2.0",
+    "x-ray-phantom": "^1.0.1",
+    "xlsx": "^0.8.0"
+  }
+}
