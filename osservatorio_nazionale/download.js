@@ -45,12 +45,16 @@ var parseSite = function(obj, data, cb) {
 		data["responsabile_procedimento"] = /Responsabile del procedimento:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 		data["luogo_lavori"] = /Luogo di esecuzione dei lavori:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 
-		data["cig"] = /CIG:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
-		data["cup"] = /CUP:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
-		data["importo1"] = /Importo del lotto compresi gli oneri per la sicurezza \(IVA esclusa\):[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "").replace("&euro; ","");
-		data["cpv1"] = /CPV1:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
-		data["cat_prevalente"] = /Categoria prevalente:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
-		data["classe"] = /Classe:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
+    if(obj.match(/ListaLotti/g)) {
+        data["lista_lotti"] = true;
+    } else {
+    		data["cig"] = /CIG:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
+    		data["cup"] = /CUP:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
+    		data["importo1"] = /Importo del lotto compresi gli oneri per la sicurezza \(IVA esclusa\):[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "").replace("&euro; ","");
+    		data["cpv1"] = /CPV1:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
+    		data["cat_prevalente"] = /Categoria prevalente:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
+    		data["classe"] = /Classe:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
+    }
 
 		data["importo_complessivo"] = /Importo complessivo a base di gara \(IVA esclusa\)<\/h2>[^\d]*([^<]*)/g.exec(obj)[1];
 
