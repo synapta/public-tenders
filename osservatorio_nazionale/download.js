@@ -20,15 +20,17 @@ function createConnection(onCreate){
 
 var parsePDF = function(path, data, callback) {
     pdfUtil.pdfToText(path, function(err, pdf) {
-        if (err) throw(err);
-
-        if(pdf.match(/CIG:.*/g))
-            data["cig_bando"] = /CIG:[ ]*(.{10})/g.exec(pdf)[1];
-        if(pdf.match(/CUP:.*/g))
-            data["cup_bando"] = /CUP:[ ]*(.{15})/g.exec(pdf)[1];
-        if(pdf.match(/CPV:.*/g))
-            data["cpv_bando"] = /CPV:[ ]*(.{10})/g.exec(pdf)[1];
-        callback(data);
+        if (err) {
+            console.log(err);
+        } else {
+            if(pdf.match(/CIG:.*/g))
+                data["cig_bando"] = /CIG:[ ]*(.{10})/g.exec(pdf)[1];
+            if(pdf.match(/CUP:.*/g))
+                data["cup_bando"] = /CUP:[ ]*(.{15})/g.exec(pdf)[1];
+            if(pdf.match(/CPV:.*/g))
+                data["cpv_bando"] = /CPV:[ ]*(.{10})/g.exec(pdf)[1];
+            callback(data);
+        }
     });
 }
 

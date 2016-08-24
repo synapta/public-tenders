@@ -20,15 +20,17 @@ function createConnection(onCreate){
 
 var parsePDF = function(path, data, callback) {
     pdfUtil.pdfToText(path, function(err, pdf) {
-        if (err) throw(err);
-
-        if(pdf.match(/CIG:.*/g))
-            data["cig_esito"] = /CIG:[ ]*(.{10})/g.exec(pdf)[1];
-        if(pdf.match(/CUP:.*/g))
-            data["cup_esito"] = /CUP:[ ]*(.{15})/g.exec(pdf)[1];
-        if(pdf.match(/CPV:.*/g))
-            data["cpv_esito"] = /CPV:[ ]*(.{10})/g.exec(pdf)[1];
-        callback(data);
+        if (err) {
+            console.log(err);
+        } else {
+            if(pdf.match(/CIG:.*/g))
+                data["cig_esito"] = /CIG:[ ]*(.{10})/g.exec(pdf)[1];
+            if(pdf.match(/CUP:.*/g))
+                data["cup_esito"] = /CUP:[ ]*(.{15})/g.exec(pdf)[1];
+            if(pdf.match(/CPV:.*/g))
+                data["cpv_esito"] = /CPV:[ ]*(.{10})/g.exec(pdf)[1];
+            callback(data);
+        }
     });
 }
 
@@ -129,7 +131,7 @@ var scrapeSCP = function(num, data, cb) {
     });
 }
 
-const max = 108029;
+const max = 1619;
 var date = "";
 
 function go(i) {
@@ -154,5 +156,5 @@ function go(i) {
 }
 
 createConnection(function(){
-    go(108029);
+    go(1619);
 });
