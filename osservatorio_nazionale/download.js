@@ -103,7 +103,7 @@ var scrapeSCP = function(num, data, cb) {
     };
     request(requestOptions, function (error, response, body) {
         if (!error) {
-            if (body.length > 8384) {
+            if (body.length > 9000) {
                 var utf8String = iconv.decode(new Buffer(body), "ISO-8859-1");
                 mongo_html.insert({id: num, date: new Date().toISOString(), file: utf8String});
                 parseSite(utf8String, data, function (data) {
