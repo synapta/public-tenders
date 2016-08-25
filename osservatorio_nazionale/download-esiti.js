@@ -45,7 +45,8 @@ var parseSite = function(obj, data, cb) {
     if(obj.match(/Modalità di realizzazione:.*/g))
 		    data["mod_realizzazione"] = /Modalità di realizzazione:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 		data["descrizione"] = /Descrizione: <\/span><b>([^<]*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
-		data["tipologia_intervento"] = /Tipologia intervento:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
+    if(obj.match(/Tipologia intervento:.*/g))
+		    data["tipologia_intervento"] = /Tipologia intervento:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
     data["cpv1"] = /CPV1:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 
     data["cat_prevalente"] = /Categoria prevalente:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
