@@ -42,7 +42,8 @@ var parseSite = function(obj, data, cb) {
 		data["tipo_settore"] = /Tipo di settore:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
     if(obj.match(/Infrastruttura strategica:.*/g))
 		    data["infrastruttura_strategica"] = /Infrastruttura strategica:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
-		data["mod_realizzazione"] = /Modalità di realizzazione:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
+    if(obj.match(/Modalità di realizzazione:.*/g))
+		    data["mod_realizzazione"] = /Modalità di realizzazione:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 		data["descrizione"] = /Descrizione: <\/span><b>([^<]*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 		data["tipologia_intervento"] = /Tipologia intervento:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
     data["cpv1"] = /CPV1:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
