@@ -83,7 +83,8 @@ var parseSite = function(obj, data, cb) {
 
     data["criterio_win"] = /Criteri di aggiudicazione<\/h2>\r\n\t\t\t<\/div>\r\n\t\t\t<b>(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 
-    data["gg_termine_prestazione"] = /numero giorni:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
+    if(obj.match(/numero giorni:.*/g))
+        data["gg_termine_prestazione"] = /numero giorni:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
     data["data_presunta_fine_lavori"] = /data presunta di fine lavori:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 
     if(obj.match(/\/PubbAvvisiBandiEsiti\/VisualizzaAllegato\.do\?/g)) {
