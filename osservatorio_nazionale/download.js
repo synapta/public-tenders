@@ -23,11 +23,11 @@ var parsePDF = function(path, data, callback) {
         if (err) {
             console.log(err);
         } else {
-            if(pdf.match(/CIG:.*/g))
+            if(pdf.match(/CIG:[ ]*(.{10})/g))
                 data["cig_bando"] = /CIG:[ ]*(.{10})/g.exec(pdf)[1];
-            if(pdf.match(/CUP:.*/g))
+            if(pdf.match(/CUP:[ ]*(.{15})/g))
                 data["cup_bando"] = /CUP:[ ]*(.{15})/g.exec(pdf)[1];
-            if(pdf.match(/CPV:.*/g))
+            if(pdf.match(/CPV:[ ]*(.{10})/g))
                 data["cpv_bando"] = /CPV:[ ]*(.{10})/g.exec(pdf)[1];
             callback(data);
         }
