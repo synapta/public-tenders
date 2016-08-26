@@ -79,7 +79,8 @@ var parseSite = function(obj, data, cb) {
     data["n_offerenti"] = /N\. imprese offerenti:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
     data["n_ammesse"] = /N\. imprese ammesse:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 
-    data["aggiudicatario"] = /Aggiudicatario<\/h2>\r\n\t\t\t<\/div>\r\n\t\t\t\r\n\t\t\t\t<UL class="link_plus_no_indent">\r\n\t\t\t\t\t<LI>\r\n\t\t\t\t\t\t<b>(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
+    if (/Aggiudicatario<\/h2>\r\n\t\t\t<\/div>\r\n\t\t\t\r\n\t\t\t\t<UL class="link_plus_no_indent">\r\n\t\t\t\t\t<LI>\r\n\t\t\t\t\t\t<b>(.*)/g.exec(obj) !== null)
+        data["aggiudicatario"] = /Aggiudicatario<\/h2>\r\n\t\t\t<\/div>\r\n\t\t\t\r\n\t\t\t\t<UL class="link_plus_no_indent">\r\n\t\t\t\t\t<LI>\r\n\t\t\t\t\t\t<b>(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 
     data["criterio_win"] = /Criteri di aggiudicazione<\/h2>\r\n\t\t\t<\/div>\r\n\t\t\t<b>(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
 
