@@ -49,7 +49,7 @@ var parseSite = function(obj, data, cb) {
 
     if(obj.match(/ListaLotti/g)) {
         data["lista_lotti"] = true;
-    } else if (obj.match(/Lotto n 1/g)) {
+    } else if (obj.match(/Lotto n/g)) {
     		data["cig"] = /CIG:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
     		data["cup"] = /CUP:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
     		data["importo1"] = /Importo del lotto compresi gli oneri per la sicurezza \(IVA esclusa\):[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "").replace("&euro; ","");
