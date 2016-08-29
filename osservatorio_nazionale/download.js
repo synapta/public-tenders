@@ -49,7 +49,7 @@ var parseSite = function(obj, data, cb) {
 
     if(obj.match(/ListaLotti/g)) {
         data["lista_lotti"] = true;
-    } else {
+    } else if (obj.match(/Lotto n 1/g)) {
     		data["cig"] = /CIG:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
     		data["cup"] = /CUP:[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "");
     		data["importo1"] = /Importo del lotto compresi gli oneri per la sicurezza \(IVA esclusa\):[ ]*(.*)/g.exec(obj)[1].replace(/<\/?[^>]+(>|$)/g, "").replace("&euro; ","");
@@ -119,7 +119,7 @@ var scrapeSCP = function(num, data, cb) {
     });
 }
 
-const max = 133233;
+const max = 118059;
 var date = "";
 
 function go(i) {
@@ -144,5 +144,5 @@ function go(i) {
 }
 
 createConnection(function(){
-    go(133233);
+    go(118059);
 });
